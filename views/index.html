@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
   <title>Welcome to HyperDev!</title>
@@ -39,11 +39,12 @@
   <div id='testui' style='margin-left: 5%'>
     <h2 style="text-align: left">Front-End:</h2>
     <h3>Get single price and total likes</h3>
-    <form id="testForm2" class="border">
+    <form id="testForm2" class="border" method="get" action="/api/stock-prices">
       <input type="text" name="stock" placeholder="goog" style="width: 100px" required=''>
       <input type="checkbox" name="like" value=true> Like?<br>
       <button type="submit">Get Price!</button>
     </form>
+    <code id='jsonResult1'></code>
     <h3>Compare and get relative likes</h3>
     <form id="testForm" class="border">
       <input type="text" name="stock" placeholder="goog" style="width: 100px" required=''>
@@ -51,7 +52,7 @@
       <input type="checkbox" name="like" value=true> Like both?<br>
       <button type="submit">Get Price!</button>
     </form>
-    <code id='jsonResult'></code>
+    <code id='jsonResult2'></code>
   </div>
   <hr style='margin: 50px; margin-top: 200px'>
   <!-- Your web-app is https, so your scripts need to be too -->
