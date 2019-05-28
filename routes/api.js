@@ -27,8 +27,9 @@ module.exports = function (app) {
       }
       console.log("like: "+ like)
       const searchTitle = req.query.singleBook;
-        console.log("searchTitle: " + searchTitle)
-      axios.get(`https://www.googleapis.com/books/v1/volumes?q=${searchTitle}&key=${process.env.KEY}`)
+      console.log("searchTitle: " + searchTitle)
+      console.log(`https://www.googleapis.com/books/v1/volumes?q=${searchTitle}&key=${process.env.KEY}`)
+        axios.get(`https://www.googleapis.com/books/v1/volumes?q=${searchTitle}&key=${process.env.KEY}`)
         .then(function (response) {
           const title = response.data.items[0].volumeInfo.title
           const pDate = response.data.items[0].volumeInfo.publishedDate
@@ -36,6 +37,7 @@ module.exports = function (app) {
         })      
         .catch(function (err) {
           console.log("Error is: " + err)
+     
         })
        
   
@@ -72,10 +74,12 @@ module.exports = function (app) {
           const titleTwo = bookTwoRes.data.items[0].volumeInfo.title
           const pDateTwo = bookTwoRes.data.items[0].volumeInfo.publishedDate
 
-          console.log("titleOne: " + titleOne)
-          console.log("titleTwo: " + titleTwo)
+          const dateOne = parseInt(pDateOne.substring(0, 4));
+          const dateTwo = parseInt(pDateTwo.substring(0, 4));
+          const diffDate = Math.abs(dateOne - dateTwo)
+          console.log(diffDate);
 
-          res.send(titleOne + " and " + titleTwo + " difference is " + pDateOne + likeBoth)
+          res.send("Between \"" + titleOne + "\" and the second book \"" + titleTwo + "\" there is " + diffDate + " year(s) published difference " + likeBoth)
         })) 
         .catch(function (err) {
           console.log("Error is: " + err)
@@ -86,15 +90,3 @@ module.exports = function (app) {
     })
 
 };
-
-/* 
- 
- axios.all([
-    axios.get('http://google.com'),
-    axios.get('http://apple.com')
-  ])
-  .then(axios.spread((googleRes, appleRes) => {
-    // do something with both responses
-  });
- 
- */
