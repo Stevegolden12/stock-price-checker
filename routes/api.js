@@ -10,8 +10,6 @@
 
 var expect = require('chai').expect;
 var MongoClient = require('mongodb');
-const iex = require('iexcloud_api_wrapper');
-const fetch = require("node-fetch");
 const axios = require('axios')
 require('dotenv').config()
 
