@@ -16,7 +16,6 @@ require('dotenv').config()
 
 const CONNECTION_STRING = process.env.DB; //MongoClient.connect(CONNECTION_STRING, function(err, db) {});
 
-
 module.exports = function (app) {
 
   app.route('/api/stock-prices')
