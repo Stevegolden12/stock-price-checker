@@ -41,6 +41,50 @@ module.exports = function (app) {
   
     });
 
+  app.route('/api/multi-stock-prices')
+    .get(function (req, res) {
+     
+      let likeBoth = "and I recommend both books.";    
+      if (req.query.likeBoth === undefined) {
+        likeBoth = "";
+      }
+      console.log("likeBoth: " + likeBoth)
+      const searchTitleOne = req.query.bookOne;
+      const searchTitleTwo = req.query.bookTwo;
+
+      console.log("searchTitleOne: " + searchTitleOne);
+      console.log(searchTitleTwo)
+
+      function getBookOne() {
+        return axios.get(`https://www.googleapis.com/books/v1/volumes?q=${searchTitleOne}&key=${process.env.KEY}`);
+      }
+
+      function getBookTwo() {
+        return axios.get(`https://www.googleapis.com/books/v1/volumes?q=${searchTitleTwo}&key=${process.env.KEY}`);
+      }
+
+
+      axios.all([getBookOne(), getBookTwo()])
+        .then(axios.spread(function (bookOneRes, bookTwoRes) {
+          // do something with both responses
+          const titleOne = bookOneRes.data.items[0].volumeInfo.title
+          const pDateOne = bookOneRes.data.items[0].volumeInfo.publishedDate
+          const titleTwo = bookTwoRes.data.items[0].volumeInfo.title
+          const pDateTwo = bookTwoRes.data.items[0].volumeInfo.publishedDate
+
+          console.log("titleOne: " + titleOne)
+          console.log("titleTwo: " + titleTwo)
+
+          res.send(titleOne + " and " + titleTwo + " difference is " + pDateOne + likeBoth)
+        })) 
+        .catch(function (err) {
+          console.log("Error is: " + err)
+        })
+
+
+
+    })
+
 };
 
 /* 

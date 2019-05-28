@@ -46,10 +46,10 @@
     </form>
     <code id='jsonResult1'></code>
     <h3>Compare and get relative likes</h3>
-    <form id="getDoubleBooks" class="border" enctype="multipart/form-data">
-      <input type="text" name="stock" placeholder="goog" style="width: 100px" required=''>
-      <input type="text" name="stock" placeholder="msft" style="width: 100px" required=''>
-      <input type="checkbox" name="like" value=true> Like both?<br>
+    <form id="getDoubleBooks" class="border" method="get" action="/api/multi-stock-prices">
+      <input type="text" name="bookOne" placeholder="book title" style="width: 100px" required=''>
+      <input type="text" name="bookTwo" placeholder="another book title" style="width: 100px" required=''>
+      <input type="checkbox" name="likeBoth" value=true> Like both?<br>
       <button type="submit">Get Price!</button>
     </form>
     <code id='jsonResult2'></code>
