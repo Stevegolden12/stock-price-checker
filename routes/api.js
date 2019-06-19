@@ -20,7 +20,7 @@ module.exports = function (app) {
 
   app.route('/api/stock-prices')
     .get(function (req, res) {
-      let like = "and I recommend this book.";
+      let like = "I enjoyed the book and would recommend it.";
       console.log("req.query.searchTitle: " + req.query.singleBook)
       if (req.query.like === undefined) {
         like = "";
@@ -30,10 +30,10 @@ module.exports = function (app) {
       console.log("searchTitle: " + searchTitle)
       console.log(`https://www.googleapis.com/books/v1/volumes?q=${searchTitle}&key=${process.env.KEY}`)
         axios.get(`https://www.googleapis.com/books/v1/volumes?q=${searchTitle}&key=${process.env.KEY}`)
-        .then(function (response) {
+          .then(function (response) {
           const title = response.data.items[0].volumeInfo.title
           const pDate = response.data.items[0].volumeInfo.publishedDate
-          res.send(title + " was published on " + pDate + like)
+            res.send(title + " written by " + response.data.items[0].volumeInfo.authors[0] + " and was published on " + pDate + ".<br><br>" + like)
         })      
         .catch(function (err) {
           console.log("Error is: " + err)
