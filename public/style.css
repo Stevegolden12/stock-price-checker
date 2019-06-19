@@ -1,0 +1,46 @@
+:root {
+  --outer-border-color: hsl(24, 100%, 50%);
+  --outer-border-color-hover: rgb(11,227,249);
+}
+
+
+h1 {
+  text-align: center;
+}
+
+#bookSearchForms {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h2 {
+  text-align: center;
+}
+
+.bookLayout {
+  display: flex;
+  justify-content: center;
+}
+
+.bookCover {
+  width: 12rem;
+  border: var(--outer-border-color) 38px solid;
+  border-radius: 5px;
+  -webkit-transition: border 1s ease-out;
+  -moz-transition: border 1s ease-out;
+  -o-transition: border 1s ease-out;
+  transition: border 1s ease-out;
+}
+
+  .bookCover:hover {
+    border: var(--outer-border-color-hover) 38px solid;
+  }
+
+form {
+  min-height: 6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
